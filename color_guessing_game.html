@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>Color Guessing Game</title>
+</head>
+    <body onload="do_game()">
+        
+      <script>
+
+        var color=["Aqua", "Bisque", "Chocolate", "Coral", "Lavender", "Lime", "MintCream", "Olive", "Orange", "Plum", "Salmon", "Tomato", "Violet", "Wheat"];
+        var target;
+        var guesses=0;
+        var guess_input; 
+        var finished = false; 
+
+
+        function do_game() {
+		    var random_number = Math.random() * 14;
+		    var random_number_integer = Math.floor(random_number);
+		    target = color[random_number_integer];
+
+		    while (!finished) {
+		        guess_input = prompt("I am thinking of one of these colors: \n"+ color.join(", ") + "\nCan you guess the color?");
+		        
+		        guesses += 1;   
+		        finished = check_guess();
+		    }
+		}
+
+		function check_guess() {
+		    if (color.indexOf(guess_input)===-1) {
+		        alert("You have not entered a color from my list.\n\n" +
+		              "Please use one of the colors listed.");
+		        return false;
+		    }
+		    if (guess_input > target) {
+		        alert("Your color is alphabetically highier than mine!");
+		        return false;
+		    }
+		    if (guess_input < target) {
+		        alert("Your color is alphabetically smaller than mine!");
+		        return false;
+		    }
+		    if (guess_input === target){
+
+		    myBody=document.getElementsByTagName("body")[0];
+			myBody.style.background=target;
+
+		    alert("You got it! The color was " + target + 
+		          ".\n\nIt took you " + guesses + 
+		          " guesses to get the color!");
+		    return true; 
+		    }  
+		}
+
+		
+
+      </script>
+    </body> 
+</html>
